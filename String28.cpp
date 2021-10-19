@@ -5,7 +5,7 @@ using namespace std;
 class Solution
 {
 public:
-  //next[] 是前缀表, j是 相同长度前缀后缀
+  // next[] 是前缀表, j是 相同长度前缀后缀
   void getNext(int *next, const string &s)
   {
     int j = 0;
