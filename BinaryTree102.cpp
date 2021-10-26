@@ -16,12 +16,12 @@ struct TreeNode
 class Solution
 {
 public:
-  vector<vector<int>> levelOrder(TreeNode *root)
+  vector<vector<int> > levelOrder(TreeNode *root)
   {
     queue<TreeNode *> que;
     if (root != NULL)
       que.push(root);
-    vector<vector<int>> result;
+    vector<vector<int> > result;
     while (!que.empty())
     {
       int size = que.size();
