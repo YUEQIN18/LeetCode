@@ -65,6 +65,9 @@
     "queue": "cpp",
     "deque": "cpp",
     "unordered_set": "cpp",
-    "__bits": "cpp"
+    "__bits": "cpp",
+    "__tree": "cpp",
+    "list": "cpp",
+    "map": "cpp"
   }
 }
