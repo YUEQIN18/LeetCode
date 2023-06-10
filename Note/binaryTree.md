@@ -1,21 +1,27 @@
 # 二叉树的遍历
 二叉树主要有两种遍历方式：
+
 深度优先遍历：先往深走，遇到叶子节点再往回走。
+
 广度优先遍历：一层一层的去遍历。
 
 那么从深度优先遍历和广度优先遍历进一步拓展，才有如下遍历方式：
+
 深度优先遍历
-前序遍历（递归法，迭代法）
-中序遍历（递归法，迭代法）
-后序遍历（递归法，迭代法）
+- 前序遍历（递归法，迭代法）
+- 中序遍历（递归法，迭代法）
+- 后序遍历（递归法，迭代法）
+
 广度优先遍历
-层次遍历（迭代法）
+- 层次遍历（迭代法）
+
 在深度优先遍历中：有三个顺序，前中后序遍历，这里前中后，其实指的就是中间节点的遍历顺序，只要大家记住 前中后序指的就是中间节点的位置就可以了。
 看如下中间节点的顺序，就可以发现，中间节点的顺序就是所谓的遍历方式
-前序遍历：中左右
-中序遍历：左中右
-后序遍历：左右中
+- 前序遍历：中左右
+- 中序遍历：左中右
+- 后序遍历：左右中
 ## 144. 二叉树的前序遍历
+```java
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -29,7 +35,10 @@ class Solution {
         traversal(root.right, res);
     }
 }
+```
+
 迭代法
+```java
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -51,7 +60,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 145. 二叉树的后序遍历
+```java
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -65,7 +77,10 @@ class Solution {
         res.add(root.val);
     }
 }
+```
+
 迭代法
+```java
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -87,8 +102,11 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 94.二叉树的中序遍历
 递归法
+```java
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -102,7 +120,10 @@ class Solution {
         traversal(root.right, res);
     }
 }
+```
+
 迭代法
+```java
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new LinkedList<>();
@@ -124,7 +145,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 102. 二叉树的层序遍历
+```java
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new LinkedList<>();
@@ -145,7 +169,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 107. 二叉树的层序遍历 II
+```java
 这道题要求从叶子节点，从下至上进行层序遍历，具体思路是在res链表添加元素时，在头部添加即可。
 class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
@@ -167,7 +194,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 199. 二叉树的右视图
+```java
 依然是层序遍历，每一层只获取最后一个元素即可。值得注意的是，向队列添加元素时，**要先添加left再添加right**，因为队列先进先出，这样最后弹出的就是最右边的元素。
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
@@ -189,7 +219,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 429. N 叉树的层序遍历
+```java
 class Solution {
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> res = new LinkedList<>();
@@ -213,7 +246,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 116. 填充每个节点的下一个右侧节点指针
+```java
 class Solution {
     public Node connect(Node root) {
         if(root == null) return root;
@@ -237,7 +273,10 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 226. 翻转二叉树
+```java
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root == null) return root;
@@ -260,8 +299,11 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 101. 对称二叉树
 这道题的思路比较简单，但我一开始没想到。可以用两个指针q,p来遍历左子树和右子树。如果是完全对称的二叉树，其左子树应该和右子树相同。
+```java
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         return check(root, root);
@@ -272,8 +314,12 @@ class Solution {
         return q.val == p.val && check(q.left, p.right) && check(q.right, p.left);
     }
 }
+```
+
+
 ## 222. 完全二叉树的节点个数
 递归法（后序遍历）
+```java
 class Solution {
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
@@ -282,7 +328,10 @@ class Solution {
         return left + right + 1;
     }
 }
+```
+
 层序遍历
+```java
 class Solution {
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
@@ -301,7 +350,10 @@ class Solution {
         return count;
     }
 }
+```
+
 ## 404. 左叶子之和
+```java
 左叶子就是叶子结点，如果不是叶子节点则不算。使用递归法，后序遍历，在返回值上累加即可。
 class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
@@ -316,10 +368,11 @@ class Solution {
     }
 }
 
-
+```
 
 ## 513. 找树左下角的值
 递归法
+```java
 class Solution {
     public int maxDepth = Integer.MIN_VALUE;
     public int result;
@@ -338,7 +391,10 @@ class Solution {
         find(root.right, depth); // 右
     }
 }
+```
+
 层序遍历法
+```java
 class Solution {
     public int findBottomLeftValue(TreeNode root) {
         Queue<TreeNode> q = new LinkedList<>();
@@ -356,8 +412,10 @@ class Solution {
         return result;
     }
 }
-## 112. 路径总和
+```
 
+## 112. 路径总和
+```java
 class Solution {
     public Boolean res = false;
     public boolean hasPathSum(TreeNode root, int targetSum) {
@@ -374,8 +432,10 @@ class Solution {
         findPath(root.right, sum, target); //右
     }
 }
-## 113. 路径总和 II
+```
 
+## 113. 路径总和 II
+```java
 class Solution {
     public List<List<Integer>> res = new LinkedList<>();
     public List<Integer> path = new LinkedList<>();
@@ -395,6 +455,8 @@ class Solution {
         path.remove(path.size()-1); //回溯path, sum不需要回溯因为它是临时变量
     }
 }
+```
+
 
 # 二叉树的深度
 今天依然是二叉树，要注意求二叉树的深度和高度是不同的。
@@ -403,6 +465,7 @@ class Solution {
 [binaryTreeDepth](https://picx.zhimg.com/80/v2-9670cba50e32e8d08fc3825a7ff1b4f0_1440w.png?source=d16d100b)
 ​
 ## 104. 二叉树的最大深度
+```java
 class Solution {
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;
@@ -421,8 +484,11 @@ class Solution {
         return depth;
     }
 }
+```
+
 ## 559. N 叉树的最大深度
 层序遍历
+```java
 class Solution {
     public int maxDepth(Node root) {
         int depth = 0;
@@ -442,7 +508,10 @@ class Solution {
         return depth;
     }
 }
+```
+
 递归遍历（后序遍历）
+```java
 class Solution {
     public int maxDepth(Node root) {
         int depth = 0;
@@ -453,8 +522,11 @@ class Solution {
         return depth+1;
     }
 }
+```
+
 ## 111. 二叉树的最小深度
 层序遍历
+```java
 class Solution {
     public int minDepth(TreeNode root) {
         if(root == null) return 0;
@@ -476,7 +548,10 @@ class Solution {
         return depth;
     }
 }
+```
+
 递归法（后序遍历）
+```java
 class Solution {
     public int minDepth(TreeNode root) {
         if(root == null) return 0;
@@ -488,8 +563,11 @@ class Solution {
         return Math.min(leftDepth, rightDepth) + 1;
     }
 }
+```
+
 ## 110. 平衡二叉树
 后序遍历，后序遍历是求高度的方法
+```java
 class Solution {
     public boolean isBalanced(TreeNode root) {
         int res = getHeight(root);
@@ -506,7 +584,10 @@ class Solution {
         return res;
     }
 }
+```
+
 ## 257. 二叉树的所有路径
+```java
 class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new LinkedList<>();
@@ -538,10 +619,13 @@ class Solution {
     }
 }
 
+```
+
 # 构造二叉树
 ## 106. 从中序与后序遍历序列构造二叉树
 主要思路就是后序遍历的最后一个值就是根节点，我们只需要从后序遍历入手，再找到这个值在中序遍历的索引（需要一个哈希表），就能把中序遍历分成3份，分变为[左子树，根节点，右子树]，再递归创建右子树和左子树，就能创建出整个树。
 值得注意的是，一定要先创建右子树，因为只能从右子树中得到根节点，再得到所有右子树的根节点后，左子树的索引才能确定。
+```java
 class Solution {
     public HashMap<Integer, Integer> map = new HashMap<>();
     public int postIndex;
@@ -569,8 +653,11 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 105. 从前序与中序遍历序列构造二叉树
  我们只需要从前序遍历入手，再找到这个值在中序遍历的索引（需要一个哈希表），就能把中序遍历分成3份，分变为[左子树，根节点，右子树]，再递归创建左子树和右子树，就能创建出整个树。
+ ```java
 class Solution {
     public HashMap<Integer, Integer> map = new HashMap<>();
     public int[] preorder;
@@ -598,7 +685,10 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 654. 最大二叉树
+```java
 递归法求解，前序遍历，构造二叉树一般都是前序遍历，因为要先确定二叉树的根节点，再确定左右节点，时间复杂度O(n^2)
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
@@ -618,8 +708,12 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 617. 合并二叉树
+
 没什么说的，简单的递归，前序遍历
+```java
 class Solution {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if(root1 == null && root2 == null) return null;
@@ -631,8 +725,11 @@ class Solution {
         return root;
     }
 }
+```
+
 # 二叉搜索树
 ## 700. 二叉搜索树中的搜索
+```java
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
         while(root != null){
@@ -646,8 +743,11 @@ class Solution {
         return null;
     }
 }
+```
+
 ## 98. 验证二叉搜索树
 中序遍历递归法，中序遍历的二叉搜索树应该是递增序列，所以pre > cur就不是搜索树
+```java
 class Solution {
     public TreeNode pre = null;
     public boolean isValidBST(TreeNode root) {
@@ -659,7 +759,10 @@ class Solution {
         return left && right;
     }
 }
+```
+
 中序遍历迭代法，使用null标记中节点。
+```java
 class Solution {
     public boolean isValidBST(TreeNode root) {
         if(root == null) return true;
@@ -684,8 +787,11 @@ class Solution {
         return true;
     }
 }
+```
+
 ## 530. 二叉搜索树的最小绝对差
 中序遍历迭代法
+```java
 class Solution {
     public int getMinimumDifference(TreeNode root) {
         Stack<TreeNode> s = new Stack<>();
@@ -710,7 +816,10 @@ class Solution {
         return diff;
     }
 }
+```
+
 中序遍历递归法
+```java
 class Solution {
     public int diff = Integer.MAX_VALUE;
     public TreeNode pre = null;
@@ -726,9 +835,12 @@ class Solution {
         inorder(root.right);
     }
 }
+```
+
 ## 501. 二叉搜索树中的众数
 一般来讲，求众数这种需要计算频率的问题，都会使用哈希表来记录频率，如下面这种算法。但这道题是**二叉搜索树**，一个有序的数组里，如果会出现众数，那他们一定是连续的，其实不需要一个哈希表，只需要记录前一个节点。
 中序遍历，哈希表算法
+```java
 class Solution {
     public LinkedList<Integer> res = new LinkedList<>();
     public Map<Integer, Integer> map = new HashMap<>();
@@ -755,7 +867,10 @@ class Solution {
         inorder(root.right);
     }
 }
+```
+
 中序遍历，只记录前一个节点
+```java
 class Solution {
     public LinkedList<Integer> res = new LinkedList<>();
     public TreeNode pre = null;
@@ -786,7 +901,10 @@ class Solution {
         inorder(root.right);
     }
 }
+```
+
 ## 236. 二叉树的最近公共祖先
+
 最开始的思路肯定是要后序遍历，因为这道题要进行从下至上的遍历，只有后序遍历能从下至上查找。
 那怎么才算找到了最近公共祖先呢？也就是说有哪些情况呢？
 根据以上定义，若 root 是 p,q 的 最近公共祖先 ，则只可能为以下情况之一：
@@ -794,6 +912,7 @@ class Solution {
 - p = root，且 q 在 root 的左或右子树中
 - q = root，且 p 在 root 的左或右子树中
 这道题很难想出递归的终止条件，主要还是因为，一个节点自己也是自己的祖先。
+```java
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || root == q || root == p) return root;
@@ -805,9 +924,12 @@ class Solution {
         return root;
     }
 }
+```
+
 
 ## 235. 二叉搜索树的最近公共祖先
 这道题的逻辑大致和[236]相同，区别是这道题是二叉搜索树，如下是二叉树找公共祖先的算法
+```java
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || root == p || root == q) return root;
@@ -819,9 +941,11 @@ class Solution {
         return root;
     }
 }
+```
+
 二叉搜索树是有序的，那么公共祖先已一定在[p, q]区间或者[q, p]区间内，而在这个区间内的数是不是一定是最近的公共祖先呢？
 是！所以我们不需要遍历整个树，找到这个节点就立刻返回，算法如下
-
+```java
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root.val > p.val && root.val > q.val) return lowestCommonAncestor(root.left, p, q);
@@ -829,8 +953,11 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 701. 二叉搜索树中的插入操作
 挺简单的题，不需要重构二叉搜索树，只要见缝插针就好
+```java
 class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
         if(root == null) return new TreeNode(val);
@@ -848,13 +975,17 @@ class Solution {
         return;
     }
 }
+```
+
 ## 450. 删除二叉搜索树中的节点
+
 在二叉搜索树中删除节点要比添加节点困难一些，主要是对树结构的修改，依然是遍历二叉搜索树（不用遍历全树），找到了要被删除的节点后，分为4种情况
 1. 找到了 为叶子结点
 2. 找到了 左子树为空
 3. 找到了 右子树为空
 4. 找到了 左右子树都不为空
 复杂的是第4种，我们要将这个节点的左子树移植到这个节点的右子树的最左边，使整个树保持二叉搜索树的性质
+```java
 class Solution {
     public TreeNode deleteNode(TreeNode root, int key) {
         if(root == null) return root;
@@ -887,9 +1018,12 @@ class Solution {
         return root;
     }
 }
+```
+
 ## 669. 修剪二叉搜索树
 看起来挺难的题，对于二叉树的修剪我总是想到左旋和右旋，但实际上这是二叉搜索树，不用那么麻烦。
 对于这道题前序遍历是很方便的，实际上对于每个节点，需判断他是否小于下界，如果是就直接把他的右子树遍历返回，再判断是否大于上界，如果是就遍历左子树然后返回。然后再正常遍历左右子树。
+```java
 class Solution {
     public TreeNode trimBST(TreeNode root, int low, int high) {
         if(root == null) return root;
@@ -907,8 +1041,11 @@ class Solution {
 
     }
 }
+```
+
 ## 108. 将有序数组转换为二叉搜索树
 构建二叉树需要分割数组，显然这个有序数组是经过中序遍历得到的，那么我们取数组中间的值开始递归构造即可。
+```java
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
         return build(nums, 0, nums.length - 1);
@@ -922,7 +1059,10 @@ class Solution {
         return node;
     }
 }
+```
+
 ## 538. 把二叉搜索树转换为累加树
+```java
 class Solution {
     public int sum = 0;
     public TreeNode convertBST(TreeNode root) {
@@ -937,3 +1077,4 @@ class Solution {
         convertBST(root.left);
     }
 }
+```
