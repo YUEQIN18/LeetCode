@@ -1,0 +1,17 @@
+# 忽略当前目录logs文件夹下的全部内容
+/logs/
+/.vscode/
+# 忽略 Mac 系统文件，包括任意子路径下的同名文件（夹）
+.DS_store
+
+# 忽略 node_modules 文件夹，包括任意子路径下的同名文件夹
+node_modules/
+
+# 忽略任意子路径下build、target文件夹，
+# 但不忽略src/main、src/test下的build、target文件夹
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
