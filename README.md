@@ -2,7 +2,7 @@
 
 目前Leetcode刷题通过数: 162
 
-目前刷题笔记整理了6中题型：
+目前刷题笔记整理了6种题型：
 - [数组问题](https://github.com/YUEQIN18/Leetcode/tree/main/Note/Array.md)
 - [二叉树问题](https://github.com/YUEQIN18/Leetcode/tree/main/Note/BinaryTree.md)
 - [动态规划问题（待完善）](https://github.com/YUEQIN18/Leetcode/tree/main/Note/Dynamic.md)
