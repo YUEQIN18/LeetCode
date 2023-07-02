@@ -134,6 +134,39 @@ class Solution {
 }
 ```
 
+## 1071. 字符串的最大公因子
+很难相信这是道简单题！
+
+如果它们有公因子 abc，那么 str1 就是 m 个 abc 的重复，str2 是 n 个 abc 的重复，连起来就是 m+n 个 abc，好像 m+n 个 abc 跟 n+m 个 abc 是一样的。
+
+所以如果 str1 + str2 === str2 + str1 就意味着有解。
+
+我们也很容易想到 str1 + str2 !== str2 + str1 也是无解的充要条件。
+
+当确定有解的情况下，最优解是长度为 gcd(str1.length, str2.length) 的字符串。
+
+这个理论最优长度是不是每次都能达到呢？是的。
+
+因为如果能循环以它的约数为长度的字符串，自然也能够循环以它为长度的字符串，所以这个理论长度就是我们要找的最优解。
+```java
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2+str1)) return "";
+        int len = gcd(str1.length(), str2.length());
+        return str1.substring(0, len);
+    }
+    // 辗转相除法
+    private int gcd(int a, int b){
+       while(b != 0){
+           int tmp = b;
+           b = a % b;
+           a = tmp;
+       }
+       return a;
+   }
+}
+```
+
 # 哈希表法
 ## 242. 有效的字母异位词
 carl老师用的是数组来解这道题，我这里用了map，其实思路是差不多的，数组可能看上去更简洁一些。
