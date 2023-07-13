@@ -4,9 +4,6 @@
  * 给你一个整数数组 flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数 n ，能否在不打破种植规则的情况下种入 n 朵花？能则返回 true ，不能则返回 false 。
  */
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Solution605 {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
