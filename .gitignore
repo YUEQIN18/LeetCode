@@ -10,6 +10,8 @@ node_modules/
 # 忽略任意子路径下build、target文件夹，
 # 但不忽略src/main、src/test下的build、target文件夹
 build/
+.idea/
+out/
 !**/src/main/**/build/
 !**/src/test/**/build/
 target/
