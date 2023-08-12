@@ -173,7 +173,7 @@ carl老师用的是数组来解这道题，我这里用了map，其实思路是�
 ```java
 class Solution {
     public boolean isAnagram(String s, String t) {
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = new Collection<>();
         for(char a: s.toCharArray()){
             if(map.containsKey(a)){
                 map.put(a, map.get(a) + 1);

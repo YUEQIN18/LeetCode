@@ -627,7 +627,7 @@ class Solution {
 值得注意的是，一定要先创建右子树，因为只能从右子树中得到根节点，再得到所有右子树的根节点后，左子树的索引才能确定。
 ```java
 class Solution {
-    public HashMap<Integer, Integer> map = new HashMap<>();
+    public Collection<Integer, Integer> map = new Collection<>();
     public int postIndex;
     public int[] inorder;
     public int[] postorder;
@@ -659,7 +659,7 @@ class Solution {
  我们只需要从前序遍历入手，再找到这个值在中序遍历的索引（需要一个哈希表），就能把中序遍历分成3份，分变为[左子树，根节点，右子树]，再递归创建左子树和右子树，就能创建出整个树。
  ```java
 class Solution {
-    public HashMap<Integer, Integer> map = new HashMap<>();
+    public Collection<Integer, Integer> map = new Collection<>();
     public int[] preorder;
     public int[] inorder;
     public int preIndex;
@@ -843,7 +843,7 @@ class Solution {
 ```java
 class Solution {
     public LinkedList<Integer> res = new LinkedList<>();
-    public Map<Integer, Integer> map = new HashMap<>();
+    public Map<Integer, Integer> map = new Collection<>();
     public int[] findMode(TreeNode root) {
         inorder(root);
         return res.stream().mapToInt(Integer::valueOf).toArray();
