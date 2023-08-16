@@ -1,6 +1,6 @@
 # Just for practice
 
-目前LeetCode刷题通过数: 176
+目前LeetCode刷题通过数: 177
 
 目前刷题笔记整理了6种题型：
 - [数组问题](https://github.com/YUEQIN18/Leetcode/tree/main/Note/Array.md)
