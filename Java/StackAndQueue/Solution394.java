@@ -12,9 +12,28 @@ import java.util.LinkedList;
  */
 public class Solution394 {
     public String decodeString(String s) {
-        Deque<Integer> stack = new LinkedList<>();
+        Deque<Character> stack = new LinkedList<>();
         StringBuilder sb = new StringBuilder();
-
+        for (char a : s.toCharArray()) {
+            if ("]".equals(String.valueOf(a))) {
+                StringBuilder temp = new StringBuilder();
+                while(!stack.isEmpty() && stack.peek().equals("[")) {
+                    temp.append(stack.pop());
+                }
+                // 弹出 "["
+                stack.pop();
+                temp.reverse();
+                // 弹出数字
+                int n = Integer.parseInt(String.valueOf(stack.pop()));
+                while (n > 0) {
+                    temp.append(temp);
+                    n--;
+                }
+                sb.append(temp);
+            } else {
+                stack.push(a);
+            }
+        }
         return sb.toString();
     }
 }
