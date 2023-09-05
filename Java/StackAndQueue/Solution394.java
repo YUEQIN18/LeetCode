@@ -11,29 +11,40 @@ import java.util.LinkedList;
  * 此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。
  */
 public class Solution394 {
+
+    // 使用递归法，相比直接使用栈然后遍历 会更简单好理解
+    private int i;
+    
     public String decodeString(String s) {
-        Deque<Character> stack = new LinkedList<>();
+        i = 0;
+        return decode(s);
+    }
+    
+    private String decode(String s) {
+        int num = 0;
         StringBuilder sb = new StringBuilder();
-        for (char a : s.toCharArray()) {
-            if ("]".equals(String.valueOf(a))) {
-                StringBuilder temp = new StringBuilder();
-                while(!stack.isEmpty() && stack.peek().equals("[")) {
-                    temp.append(stack.pop());
+        while (i < s.length()) {
+            char c = s.charAt(i++);
+            if (c == ']') {
+                break; //结束递归
+            } else if (c == '[') {
+                String temp = decode(s);
+                for (int i = 0; i < num; i++) {
+                    sb.append(temp);
                 }
-                // 弹出 "["
-                stack.pop();
-                temp.reverse();
-                // 弹出数字
-                int n = Integer.parseInt(String.valueOf(stack.pop()));
-                while (n > 0) {
-                    temp.append(temp);
-                    n--;
-                }
-                sb.append(temp);
+                num = 0;
+            } else if (c >= '0' && c <= '9') {
+                num = num * 10  + c - '0'; // 如果num是两位数或者三位数，需要*10
             } else {
-                stack.push(a);
+                sb.append(c);
             }
         }
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Solution394 solution394 = new Solution394();
+        String s = solution394.decodeString("3[a]2[bc]");
+        System.out.println(s);
     }
 }
