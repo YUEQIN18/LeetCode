@@ -2,44 +2,26 @@ package LinkdeList;
 
 public class Solution92 {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        ListNode cur = head;
-        int n = 1;
-        // 走left - 1步，来到left的前一个节点
-        while (n <= left - 1) {
-            cur = cur.next;
-            n++;
+        // 这里使用了3个指针
+        // pre 指向了left节点的前一个，不变
+        // cur 指向了left节点，不变
+        // next 指向cur节点的下一个，会在循环中变化
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode pre = dummyHead;
+        for (int i = 0; i < left - 1; i ++) {
+            pre = pre.next;
         }
-        ListNode leftNode = cur;
-        ListNode start = cur.next;
-        // 走到right节点
-        while (n <= right) {
-            cur = cur.next;
-            n++;
-        }
-        ListNode end = cur;
-        ListNode rightNode = cur.next;
-        // 切断链表
-        leftNode.next = null;
-        end.next = null;
-        // 反转
-        reverseLinkedList(start);
-        // 拼接上
-        leftNode.next = end;
-        start.next = rightNode;
-        return head;
-    }
+        ListNode cur = pre.next;
+        ListNode next;
+        for (int i = 0; i < right - left; i++) {
+            next = cur.next;
+            cur.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
 
-    private void reverseLinkedList(ListNode head){
-        // 也可以使用递归反转一个链表
-        ListNode pre = null;
-        ListNode cur = head;
-
-        while (cur != null) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
         }
+        return dummyHead.next;
     }
 
      public static class ListNode {
