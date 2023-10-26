@@ -7,6 +7,7 @@ package LinkdeList;
  */
 public class Solution86 {
     public ListNode partition(ListNode head, int x) {
+        if (head == null || head.next == null) return head;
         // 找到第一个大于x的节点 的前一个节点left，之后的每个值都移动到left右边，left每次要更新
         ListNode dummyHead = new ListNode(-1, head);
         ListNode left = dummyHead;
@@ -15,10 +16,10 @@ public class Solution86 {
         }
         ListNode right = left.next;
         ListNode cur = right;
-        while (cur.next != null) {
+        while (cur != null && cur.next != null) {
             if (cur.next.val < x) {
-                cur.next = cur.next.next;
                 ListNode temp = cur.next;
+                cur.next = cur.next.next;
                 left.next = temp;
                 temp.next = right;
                 left = temp;
