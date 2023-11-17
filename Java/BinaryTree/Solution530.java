@@ -19,6 +19,7 @@ public class Solution530 {
         }
         return min;
     }
+
     private void traversal(TreeNode root) {
         if (root == null) return;
         traversal(root.left);
