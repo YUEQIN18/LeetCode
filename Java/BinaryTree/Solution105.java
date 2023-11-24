@@ -10,11 +10,9 @@ import java.util.Map;
 public class Solution105 {
     private Map<Integer, Integer> map = new HashMap<>();
     private int[] preorder;
-    private int[] inorder;
     private int preIndex = 0;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         this.preorder = preorder;
-        this.inorder = inorder;
         int length = inorder.length;
         for (int i = 0; i < length; i++) {
             map.put(inorder[i], i);
