@@ -12,6 +12,21 @@ import java.util.*;
  */
 public class Solution399 {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        // 生成储存变量所构成的图, 本质上是一种json结构 graph = {a: {b: 3, ...}, ...}
+        Map<String, Map<String, Double>> graph = new HashMap<>();
+        int n = equations.size();
+        for (int i = 0; i < n; i++) {
+            String s = equations.get(i).get(0), e = equations.get(i).get(1);
+            double v = values[i]; // v = s / e
+            if (!graph.containsKey(s)) graph.put(s, new HashMap<>());
+            if (!graph.containsKey(e)) graph.put(e, new HashMap<>());
+            graph.get(s).put(e, v); // 生成一条s指向e，权重为v的路径，表示 s / e = v
+            graph.get(e).put(s, 1 / v);
+
+        }
+    }
+
+    public double[] calcEquationV2(List<List<String>> equations, double[] values, List<List<String>> queries) {
         int nvars = 0;
         Map<String, Integer> variables = new HashMap<String, Integer>();
         // 先遍历已知的变量
@@ -34,6 +49,7 @@ public class Solution399 {
             edges[va].add(new Pair(vb, values[i]));
             edges[vb].add(new Pair(va, 1.0 / values[i]));
         }
+        // 确定每个问题的答案
         int queriesCount = queries.size();
         double[] ret = new double[queriesCount];
         for (int i = 0; i < queriesCount; i++) {
@@ -44,7 +60,7 @@ public class Solution399 {
                 if (ia == ib) {
                     result = 1.0;
                 } else {
-                    Queue<Integer> points = new LinkedList<Integer>();
+                    Queue<Integer> points = new LinkedList<>();
                     points.offer(ia);
                     double[] ratios = new double[nvars];
                     Arrays.fill(ratios, -1.0);
