@@ -21,8 +21,52 @@ public class Solution399 {
             if (!graph.containsKey(s)) graph.put(s, new HashMap<>());
             if (!graph.containsKey(e)) graph.put(e, new HashMap<>());
             graph.get(s).put(e, v); // 生成一条s指向e，权重为v的路径，表示 s / e = v
-            graph.get(e).put(s, 1 / v);
+            graph.get(e).put(s, 1 / v); // 生成一条反向路径，权重为1 / v，表示 e / s = 1 /v
+            graph.get(s).put(s, 1.0); // 生成一个指向自己、权重为1的路径，表示自己除自己等于1
+            graph.get(e).put(e, 1.0); // 生成一个指向自己、权重为1的路径，表示自己除自己等于1
+        }
+        Queue<NodeData> queue = new LinkedList<>();   // 用于广度优先搜索的队列
+        int m = queries.size();
+        double[] res = new double[m];    // 答案列表
+        Arrays.fill(res, -1.0);          // 初始都为-1表示未定义
+        Set<String> visited;
+        // 对于每一个query 寻找从起点qx到终点qy的最短路径 并计算权重积
+        for (int i = 0; i < m; i++) {
+            String qx = queries.get(i).get(0), qy = queries.get(i).get(1);
+            if (!graph.containsKey(qx) || !graph.containsKey(qy)) continue;
+            queue.offer(new NodeData(qx, 1.0));
+            visited = new HashSet<>(); // 记录已经遍历过的节点
+            visited.add(qx);
+            while (!queue.isEmpty()) {
+                NodeData node = queue.poll();
+                // 遍历当前节点的所有邻节点
+                for (Map.Entry<String, Double> entry : graph.get(node.var).entrySet()) {
+                    String neighbor = entry.getKey();
+                    Double weight = entry.getValue();
+                    // 找到终点 保存答案 结束遍历
+                    if (qy.equals(neighbor)) {
+                        res[i] = node.mulWeight * weight;
+                    }
+                    // 找到未处理的邻节点
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        // 将未处理的邻节点及到达该节点时的权重积加入队列
+                        queue.offer(new NodeData(neighbor, node.mulWeight * weight));
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
+    // 用于广度优先搜索存储数据的节点数据结构
+    class NodeData{
+        String var;         // 当前变量名
+        double mulWeight;   // 到达该节点时的累乘权重积
+
+        NodeData(String var, double weight){
+            this.var = var;
+            this.mulWeight = weight;
         }
     }
 
