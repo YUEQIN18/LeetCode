@@ -28,10 +28,12 @@ public class Solution433 {
         while (!d.isEmpty()) {
             int size = d.size();
             while (size-- > 0) {
-                String s = d.pollFirst();
+                String s = d.pollFirst(); // 取出
                 char[] cs = s.toCharArray();
-                int step = map.get(s);
+                int step = map.get(s); // 从start到现在的gene经历了几次突变
+                // 对一个gene的每一位都尝试突变
                 for (int i = 0; i < 8; i++) {
+                    // 每一位都尝试突变成A C G T
                     for (char c : items) {
                         if (cs[i] == c) continue;
                         char[] clone = cs.clone();
