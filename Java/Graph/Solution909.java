@@ -25,6 +25,7 @@ import java.util.Set;
  * 返回达到编号为 n2 的方格所需的最少移动次数，如果不可能，则返回 -1。
  */
 public class Solution909 {
+    // 这道题的一个难点就是二维数组坐标转换，这里还是建议将二维数组转换为一维
     public int snakesAndLadders(int[][] board) {
         int n = board.length; // n x n 的棋盘
         int length = n * n;
