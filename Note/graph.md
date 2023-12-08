@@ -97,4 +97,68 @@ class SolutionGraphDFS {
 
 ## BFS 遍历
 
+当我们需要找到最短路径的时候，使用广度优先搜索会更合适
+
 ### 909. 蛇梯棋
+
+这道题要求从起点（编号为 1 的格子）到终点（编号为 n^2 的格子）的最短路径。
+
+和传统的矩阵路径搜索不一样的是，它的下一个搜索方格不是相邻方格，而是下6个编号。
+即如果当前处理的方格编号为 curr，那么其可以转移到编号属于 [curr + 1, min(curr + 6, n2)] 的方格里。
+
+因为是一个顺序复杂的二维矩阵，我们将其转换成一维数组处理会方便很多
+
+```java
+public class Solution909 {
+    // 这道题的一个难点就是二维数组坐标转换，这里还是建议将二维数组转换为一维
+    public int snakesAndLadders(int[][] board) {
+        int n = board.length; // n x n 的棋盘
+        int length = n * n;
+        int step = 0;
+        Set<Integer> set = new HashSet<>(); // 记录遍历过的节点
+        // 二维数组转换成一维
+        int[] nums = twoForOne(board, n);
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(1); // 棋盘index从 1 开始
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int k = 0; k < size; k++) {
+                int curIndex = queue.poll();
+
+                if (curIndex == length) return step;
+                if (set.contains(curIndex)) continue;
+                set.add(curIndex);
+                // 走下一步
+                for (int i = curIndex + 1; i <= Math.min(curIndex + 6, length); i++) {
+                    int ladder = nums[i];
+                    int next = ladder == -1 ? i : ladder;
+                    queue.offer(next);
+                }
+            }
+            step++;
+        }
+        return -1;
+    }
+
+    public int[] twoForOne(int[][] board, int n) {
+        int[] nums = new int[n * n + 1];
+        int index = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            //取最下方为第一行,奇数行正向,偶数行反向
+            int row = n - i;
+            if (row % 2 == 1) {
+                for (int j = 0; j < n; j++) {
+                    nums[index++] = board[i][j];
+                }
+            } else {
+                for (int j = n - 1; j >= 0; j--) {
+                    nums[index++] = board[i][j];
+                }
+            }
+        }
+        for (int num : nums) System.out.print(num + " ");
+        return nums;
+    }
+}
+```
