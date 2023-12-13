@@ -28,7 +28,7 @@ public class Solution208 {
      * <p>
      * 最后，关于 Trie 的应用场景，希望你能记住 8 个字：一次建树，多次查询。
      */
-    static class Trie {
+     class Trie {
 
         private boolean end;
 

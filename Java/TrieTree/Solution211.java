@@ -63,5 +63,7 @@ public class Solution211 {
         wordDictionary.addWord("bad");
         wordDictionary.addWord("dad");
         wordDictionary.addWord("mad");
+        boolean mad = wordDictionary.search("mad");
+        System.out.println(mad);
     }
 }
