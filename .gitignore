@@ -13,8 +13,8 @@ build/
 .idea/
 out/
 !**/src/main/**/build/
-!**/src/test/**/build/
+!**/src/GeneralTest/**/build/
 target/
 !**/src/main/**/target/
-!**/src/test/**/target/
+!**/src/GeneralTest/**/target/
 LeetCode.iml

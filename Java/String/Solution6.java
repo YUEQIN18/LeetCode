@@ -2,6 +2,7 @@ package String;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.*;
 
 /**
  * 6. N 字形变换
